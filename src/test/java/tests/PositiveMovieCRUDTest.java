@@ -147,7 +147,11 @@ public class PositiveMovieCRUDTest extends BaseTest {
         Path updatedPosterPath = Path.of("src", "test", "resources", "poster_test_data", "popcorn_updated.png").toAbsolutePath();
         uploadInput.sendKeys(updatedPosterPath.toString());
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']"))).click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+
+        actions.scrollToElement(submitButton).perform();
+
+        submitButton.click();
 
         wait.until(ExpectedConditions.urlContains("Movies"));
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("h1"), "Movies"));
@@ -205,7 +209,11 @@ public class PositiveMovieCRUDTest extends BaseTest {
 
         assertEquals("Are you sure you want to delete Movie Title Changed?", driver.findElement(By.tagName("h1")).getText());
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']"))).click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+
+        actions.scrollToElement(submitButton).perform();
+
+        submitButton.click();
 
         wait.until(ExpectedConditions.urlContains("Movies"));
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("h1"), "Movies"));
