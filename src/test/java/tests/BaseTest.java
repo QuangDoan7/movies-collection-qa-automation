@@ -13,6 +13,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.nio.file.Path;
+import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -26,6 +27,7 @@ public class BaseTest {
         options.setAcceptInsecureCerts(true);
 
         driver = new ChromeDriver(options);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
         String baseUrl = System.getenv().getOrDefault(
                 "MOVIES_BASE_URL",
