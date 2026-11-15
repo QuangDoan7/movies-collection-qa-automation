@@ -7,7 +7,6 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import pages.LoginPage;
-import pages.MoviesPage;
 
 import java.nio.file.Path;
 import java.util.UUID;

@@ -19,7 +19,7 @@ The source application and the automation tests are separate projects. This repo
 | Build tool             | Maven                                                                                                   |
 | IDE                    | IntelliJ IDEA                                                                                           |
 | Browser                | Google Chrome                                                                                           |
-| Application under test | ASP.NET Core, SQL Server                                                                                |
+| Application under test | ASP.NET Core (.NET 9), EF Core, SQLite                                                                  |
 | Test design            | Positive/negative functional testing, equivalence partitioning, boundary value analysis, error guessing |
 | Test organization      | Page Object Model, base test class, helpers, positive and negative suites                               |
 

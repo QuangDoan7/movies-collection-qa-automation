@@ -32,7 +32,7 @@ Performance, load, penetration, and cross-platform testing are outside the curre
 | Build and dependency management | Maven                                                                      |
 | Browser                         | Google Chrome                                                              |
 | IDE                             | IntelliJ IDEA                                                              |
-| Application database            | SQL Server (`MoviesDBContext`)                                             |
+| Application database            | SQLite (`MoviesDBContext`)                                                 |
 | Test target                     | `https://localhost:7285/`                                                  |
 
 **Version note:** Runtime/browser and dependency versions can change. The Maven `pom.xml` is the source of truth for the project's current Selenium, JUnit, and Surefire versions. The Test Plan and Test Execution Results record the environments used for specific executions.
@@ -122,7 +122,7 @@ Test credentials are currently used by the local automation code. For a public r
 Before running the automation:
 
 1. Install **JDK 21**, Maven (or use the project's configured Maven runner), and Google Chrome.
-2. Make sure **Movies Collection** and its SQL Server database are available locally.
+2. Make sure **Movies Collection** and its SQLite database are available locally.
 3. Start the ASP.NET Core application so that `https://localhost:7285/` is accessible in Chrome. Trust the local development HTTPS certificate where necessary.
 4. Ensure the required test accounts and baseline movie data exist in the database.
 5. Use a Chrome/WebDriver-compatible local setup. Selenium Manager can provision browser drivers in supported environments.
@@ -162,7 +162,7 @@ The documented execution results provided for this portfolio record **53 test ca
 
 ## 10. CI/CD Status
 
-The automation project is Maven-based and can be integrated into a CI workflow. **A GitHub Actions workflow is not established by the source reviewed for this documentation**, so CI execution is not presented as implemented. The current framework assumes a locally running ASP.NET Core application, SQL Server, and Chrome environment; these dependencies must be provisioned before reliable CI execution.
+The automation project is Maven-based and can be integrated into a CI workflow. **A GitHub Actions workflow is not established by the source reviewed for this documentation**, so CI execution is not presented as implemented. The current framework assumes a locally running ASP.NET Core application, SQLite, and Chrome environment; these dependencies must be provisioned before reliable CI execution.
 
 ## 11. Known Limitations and Maintenance Notes
 

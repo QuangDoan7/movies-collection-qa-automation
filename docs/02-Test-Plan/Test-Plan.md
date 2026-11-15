@@ -64,8 +64,8 @@ This test plan defines the testing activities for the Movies Collection applicat
 
 Operating System: Windows 11  
 Browser: Google Chrome (Version 157.0.8103.51 (Official Build) (64-bit))  
-Database: MoviesDBContext (SQL Server 2019)  
-Application: Movies Collection (ASP.NET Core)  
+Database: MoviesDBContext (SQLite)  
+Application: Movies Collection (ASP.NET Core (.NET 9), EF Core)  
 Application URL: https://localhost:7285/  
 Selenium: 4.52.0  
 Java: JDK 21  

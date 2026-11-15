@@ -5,7 +5,7 @@
 **Environment:** Localhost - https://localhost:7285/  
 **Operating System:** Windows 11  
 **Application:** Movies Collection (ASP.NET Core)  
-**Database:** SQL Server 2019 (`MoviesDBContext`)  
+**Database:** SQLite (`MoviesDBContext`)  
 **Browser:** Google Chrome (Version 157.0.8103.51 (Official Build) (64-bit))
 **Tools:** Selenium WebDriver, JUnit 5, Maven  
 

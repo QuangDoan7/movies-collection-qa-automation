@@ -1,0 +1,93 @@
+name: Movies Collection Selenium Regression Tests
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  selenium-regression:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout QA Automation
+        uses: actions/checkout@v4
+
+      - name: Checkout Movies Collection
+        uses: actions/checkout@v4
+        with:
+          repository: QuangDoan7/movies-collection
+          ref: master
+          path: movies-app
+
+      - name: Set up .NET 9
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      - name: Set up Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+          cache: maven
+
+      - name: Check Chrome
+        run: google-chrome --version
+
+      - name: Prepare HTTPS Certificate
+        run: dotnet dev-certs https
+
+      - name: Start Movies Collection
+        working-directory: movies-app
+        env:
+          ASPNETCORE_ENVIRONMENT: Development
+        run: |
+          nohup dotnet run --no-launch-profile \
+            --urls "https://localhost:7285" \
+            > ../movies-app.log 2>&1 &
+
+      - name: Wait for Movies Collection
+        run: |
+          for i in {1..60}; do
+            if curl --insecure --fail --silent \
+              https://localhost:7285/ > /dev/null; then
+              echo "Movies Collection is ready"
+              exit 0
+            fi
+            sleep 2
+          done
+
+          echo "Application failed to start"
+          cat movies-app.log
+          exit 1
+
+      - name: Run Positive Test Suite
+        env:
+          MOVIES_BASE_URL: https://localhost:7285/
+        run: xvfb-run -a mvn --batch-mode "-Dtest=PositiveTestSuite" test
+
+      - name: Run Negative Test Suite
+        env:
+          MOVIES_BASE_URL: https://localhost:7285/
+        run: xvfb-run -a mvn --batch-mode "-Dtest=NegativeTestSuite" test
+
+      - name: Upload Selenium Test Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: selenium-test-reports
+          path: target/surefire-reports/
+          if-no-files-found: warn
+
+      - name: Upload Application Logs
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: movies-application-logs
+          path: movies-app.log
+          if-no-files-found: warn

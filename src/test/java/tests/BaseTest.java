@@ -6,30 +6,33 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.nio.file.Path;
-import java.time.Duration;
-import java.util.ArrayList;
-import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class BaseTest {
-    protected WebDriver driver;;
+    protected WebDriver driver;
     protected WebDriverWait wait;
 
     @BeforeEach
     public void setUpEach() {
-        driver = new ChromeDriver();
-        driver.get("https://localhost:7285/");
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        ChromeOptions options = new ChromeOptions();
+        options.setAcceptInsecureCerts(true);
 
-        wait.until(ExpectedConditions.titleIs("Movies Collection"));
+        driver = new ChromeDriver(options);
+
+        String baseUrl = System.getenv().getOrDefault(
+                "MOVIES_BASE_URL",
+                "https://localhost:7285/"
+        );
+
+        driver.get(baseUrl);
     }
 
     @AfterEach
