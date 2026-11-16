@@ -1,4 +1,9 @@
-# Movies Collection - QA Automation Portfolio
+# Movies Collection - QA Automation
+
+[![Maven Build](https://github.com/QuangDoan7/movies-collection-qa-automation/actions/workflows/maven-build.yml/badge.svg)](https://github.com/QuangDoan7/movies-collection-qa-automation/actions/workflows/maven-build.yml)  
+[![Selenium Regression Tests](https://github.com/QuangDoan7/movies-collection-qa-automation/actions/workflows/selenium-regression.yml/badge.svg)](https://github.com/QuangDoan7/movies-collection-qa-automation/actions/workflows/selenium-regression.yml)
+
+Automated end-to-end testing for the Movies Collection ASP.NET Core application using Selenium WebDriver, Java, JUnit 5, and Maven.
 
 A **software quality assurance and UI test automation project** for the Movies Collection ASP.NET Core web application. The project demonstrates requirements-based test design, Selenium automation with Java, positive and negative testing, defect reporting, and traceability from requirements to execution results.
 
