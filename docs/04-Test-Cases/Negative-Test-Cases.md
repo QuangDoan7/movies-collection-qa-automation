@@ -202,7 +202,7 @@
 
 **Test Steps:**
 1. Open Login.
-2. For each password value, enter email `test@mail.com` and the supplied password.
+2. For each password value, enter email `userABC123@mail.com` and the supplied password.
 3. Submit and inspect the login error.
 
 **Expected Result:**

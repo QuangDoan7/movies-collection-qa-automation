@@ -42,7 +42,7 @@ public class NegativeLoginTest extends BaseTest {
             "abc123!@#", "ABC123!@#", "ABCabc!@#", "Abcde!@#$"
     })
     public void invalidPasswordLoginTest(String password) {
-        userLogin.login("test@mail.com", password);
+        userLogin.login("userABC123@mail.com", password);
 
         assertEquals("Invalid login attempt.", userLogin.getInvalidLoginAttempt());
     }
