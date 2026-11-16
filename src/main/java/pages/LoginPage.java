@@ -2,6 +2,10 @@ package pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class LoginPage {
     private final WebDriver driver;
@@ -37,7 +41,11 @@ public class LoginPage {
     }
 
     public String getInvalidLoginAttempt() {
-        return driver.findElement(By.cssSelector("div[role='alert']")).getText();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        By errorLocator = By.cssSelector("#account div[role='alert']");
+
+        return wait.until(ExpectedConditions.visibilityOfElementLocated(errorLocator)).getText();
     }
 
     public String getPasswordErrorMessage() {

@@ -62,7 +62,12 @@ public class NegativeMovieCRUDTest extends BaseTest {
         Path testPosterPath = Path.of("src", "test", "resources", "poster_test_data", "popcorn.png").toAbsolutePath();
         driver.findElement(By.id("Upload")).sendKeys(testPosterPath.toString());
 
-        driver.findElement(By.xpath("//input[@type='submit']")).click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(submitButton).perform();
+
+        submitButton.click();
 
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("Movie_Title-error"), "The Title field is required."));
 
@@ -88,7 +93,12 @@ public class NegativeMovieCRUDTest extends BaseTest {
         Path testPosterPath = Path.of("src", "test", "resources", "poster_test_data", "popcorn.png").toAbsolutePath();
         driver.findElement(By.id("Upload")).sendKeys(testPosterPath.toString());
 
-        driver.findElement(By.xpath("//input[@type='submit']")).click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(submitButton).perform();
+
+        submitButton.click();
 
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("SelectedGenres-error"), "The SelectedGenres field is required."));
 
@@ -118,7 +128,12 @@ public class NegativeMovieCRUDTest extends BaseTest {
         Path testPosterPath = Path.of("src", "test", "resources", "poster_test_data", "popcorn.png").toAbsolutePath();
         driver.findElement(By.id("Upload")).sendKeys(testPosterPath.toString());
 
-        driver.findElement(By.xpath("//input[@type='submit']")).click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(submitButton).perform();
+
+        submitButton.click();
 
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//span[@data-valmsg-for='Movie.ReleaseYear']"), "Release Year must be between 1900 and the current year " + (java.time.Year.now().getValue()) + "."));
 
@@ -148,7 +163,12 @@ public class NegativeMovieCRUDTest extends BaseTest {
         Path testPosterPath = Path.of("src", "test", "resources", "poster_test_data", "popcorn.png").toAbsolutePath();
         driver.findElement(By.id("Upload")).sendKeys(testPosterPath.toString());
 
-        driver.findElement(By.xpath("//input[@type='submit']")).click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(submitButton).perform();
+
+        submitButton.click();
 
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//span[@data-valmsg-for='Movie.ReleaseYear']"), "Release Year must be between 1900 and the current year " + (java.time.Year.now().getValue()) + "."));
 
@@ -253,7 +273,12 @@ public class NegativeMovieCRUDTest extends BaseTest {
         Path testPosterPath = Path.of("src", "test", "resources", "poster_test_data", "popcorn.png").toAbsolutePath();
         driver.findElement(By.id("Upload")).sendKeys(testPosterPath.toString());
 
-        driver.findElement(By.xpath("//input[@type='submit']")).click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+
+        Actions actions = new Actions(driver);
+        actions.scrollToElement(submitButton).perform();
+
+        submitButton.click();
 
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("Movie_Rating-error"), "Rating must be between 1 and 100."));
 
@@ -404,7 +429,11 @@ public class NegativeMovieCRUDTest extends BaseTest {
         lastWatchedYearInput.clear();
         lastWatchedYearInput.sendKeys(String.valueOf(java.time.Year.now().getValue() + 1));
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']"))).click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+
+        actions.scrollToElement(submitButton).perform();
+
+        submitButton.click();
 
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//span[@data-valmsg-for='Movie.LastWatchedYear']"), "Last Watched Year must be between the release year " + releaseYear + " and the current year " + (java.time.Year.now().getValue()) + "."));
 
@@ -439,7 +468,11 @@ public class NegativeMovieCRUDTest extends BaseTest {
         ratingInput.clear();
         ratingInput.sendKeys("0");
 
-        wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']"))).click();
+        WebElement submitButton = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='submit']")));
+
+        actions.scrollToElement(submitButton).perform();
+
+        submitButton.click();
 
         wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("Movie_Rating-error"), "Rating must be between 1 and 100."));
 
@@ -488,7 +521,14 @@ public class NegativeMovieCRUDTest extends BaseTest {
     public void deleteTestMovieIfAny() {
         if (!movieCreated) { return; }
 
-        navigateToMoviesPage();
+        String moviesUrl = java.net.URI
+                .create(driver.getCurrentUrl())
+                .resolve("/Movies")
+                .toString();
+
+        driver.navigate().to(moviesUrl);
+
+        wait.until(ExpectedConditions.textToBePresentInElementLocated(By.tagName("h1"),"Movies"));
 
         if (!driver.findElements(By.xpath("//div[@class='card-body']/p/span[normalize-space()='" + testMovieTitle + "']")).isEmpty()) {
             deleteTestMovie(testMovieTitle);
