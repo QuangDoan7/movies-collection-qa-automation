@@ -3,7 +3,11 @@ name: Movies Collection Selenium Regression Tests
 on:
   push:
     branches: [main]
+
   workflow_dispatch:
+
+  repository_dispatch:
+    types: [movies_collection_updated]
 
 permissions:
   contents: read
